@@ -103,6 +103,7 @@ class Executer
     public function execute()
     {
         $this->exectuion_response = null;
+        $this->execution_errors = null;
 
         if (exec($this->application_path . $this->generateArguments(), $this->exectuion_response)) {
             return true;

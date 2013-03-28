@@ -18,14 +18,17 @@ require_once '../src/Ballen/Executioner/Executer.php';
 use Ballen\Executioner\Executer;
 
 $runner = new Executer();
-$runner->setApplication('ipcodfdfnfig')
-        ->addArgument('/flushdns')
-        ->asExec()
+
+$runner->setApplication('php') // Call the PHP executable to display the version infomation.
+        ->addArgument('-v') // Displays the PHP version number!
+        #->asExec()
         ->execute();
 
-echo $runner->resultAsText();
+echo '<pre>' .$runner->resultAsText().'</pre><br/><br/>';
 
-#print_r($runner->resultAsArray());
+var_dump($runner->resultAsArray());
+
+#echo $runner->resultAsJSON();
 
 print_r($runner->getErrors());
 ?>
