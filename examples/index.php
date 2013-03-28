@@ -15,6 +15,17 @@
  */
 require_once '../src/Ballen/Executioner/Executer.php';
 
-use Ballen\Executioner\Exectuter;
+use Ballen\Executioner\Executer;
 
+$runner = new Executer();
+$runner->setApplication('ipcodfdfnfig')
+        ->addArgument('/flushdns')
+        ->asExec()
+        ->execute();
+
+echo $runner->resultAsText();
+
+#print_r($runner->resultAsArray());
+
+print_r($runner->getErrors());
 ?>
