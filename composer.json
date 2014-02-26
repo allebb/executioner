@@ -3,7 +3,7 @@
     "version": "2.0.0",
     "description": "Executioner is a PHP library for executing system processes and applications with the ability to pass extra arguments and read CLI output results.",
     "type": "library",
-    "keywords": ["execute", "process", "run", "execution", "cli", "exec()"],
+    "keywords": ["execute", "process", "run", "execution", "cli", "exec", "passthru"],
     "license": "MIT",
     "authors": [
         {
