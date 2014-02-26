@@ -1,15 +1,15 @@
 {
     "name": "ballen/executioner",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "Executioner is a PHP library for executing system processes and applications with the ability to pass extra arguments and read CLI output results.",
     "type": "library",
-    "keywords": ["execute", "process", "run", "exection", "cli"],
+    "keywords": ["execute", "process", "run", "execution", "cli", "exec()"],
     "license": "MIT",
     "authors": [
         {
             "name": "ballen",
-            "email": "bobbyallen.uk@gmail.com",
-            "homepage": "http://www.supared.com",
+            "email": "ballen@bobbyallen.me",
+            "homepage": "http://bobbyallen.me",
             "role": "Developer"
         }
     ],

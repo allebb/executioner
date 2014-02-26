@@ -3,21 +3,21 @@
 /**
  * Executioner Process Execution Library
  *
- * Executioner (executer) is a PHP library for executing system processes
+ * Executioner is a PHP library for executing system processes
  * and applications with the ability to pass extra arguments and read
  *  CLI output results.
  *
- * @author bobbyallen.uk@gmail.com (Bobby Allen)
- * @version 1.0.0
+ * @author ballen@bobbyallen.me (Bobby Allen)
+ * @version 2.0.0
  * @license http://opensource.org/licenses/MIT
  * @link https://github.com/bobsta63/executioner
  *
  */
-require_once '../src/Ballen/Executioner/Executer.php';
+require_once '../src/Ballen/Executioner/Executioner.php';
 
-use Ballen\Executioner\Executer;
+use Ballen\Executioner\Executioner;
 
-$runner = new Executer();
+$runner = new Executioner();
 
 $runner->setApplication('php') // Call the PHP executable to display the version infomation.
         ->addArgument('-v') // Displays the PHP version number!
