@@ -120,9 +120,11 @@ class Executioner
      */
     protected function isExecutable()
     {
-        if (is_executable($this->application_path))
+        if (is_executable($this->application_path)) {
             return true;
-        return false;
+        } else {
+            return false;
+        }
     }
 
     /**
