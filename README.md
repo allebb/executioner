@@ -32,9 +32,7 @@ Alternatively you can manually add this library to your project using the follow
 
 Then install the package like so:
 
-```composer update ballen/executioner --no-dev```
-
-For those that are not using Composer you can extract the main library class file (``Executioner.php``) from ``src/`` and *require* directly in your PHP projects.
+```composer update ballen/executioner```
 
 Usage example
 --------
@@ -56,6 +54,8 @@ $run->execute();
 // We'll simply just display the results as a plain text string...
 echo $run->resultAsText();
 ```
+
+An example of getting the PHP version number using ``php -v CLI`` call.
 
 ```php
 use Ballen\Executioner\Executioner;
