@@ -12,25 +12,25 @@
  *
  */
 require_once '../vendor/autoload.php';
-
 use Ballen\Executioner\Executioner;
 
-$runner = new Executioner();
+$run = new Executioner();
 
 /**
  * An example showing how to view details of a server's network settings eg. ifconfig/ipconfig
  */
 if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
     // Windows uses 'ipconfig' to report on the network settings.
-    $runner->setApplication('ipconfig');
+    $run->setApplication('ipconfig');
 } else {
-    // Linux and UNIX generally uses 'ifconfig' instead...
-    $runner->setApplication('ifconfig');
+    // Linux and UNIX generally uses 'ifconfig' instead (well run it with 'sudo' too just for the sake of it)...
+    $run->sudo()
+        ->setApplication('ifconfig');
 }
 
 // We'll now execute the application and get the 'results'
-$runner->execute();
+$run->execute();
 
 // We'll simply just display the results as plain text...
 echo '<h2>Server NIC settings:</h2>';
-echo '<pre>' . $runner->resultAsText() . '</pre>';
+echo '<pre>' . $run->resultAsText() . '</pre>';

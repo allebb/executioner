@@ -38,15 +38,31 @@ class Executioner
     private $exectuion_response;
 
     /**
-     * Specifies the method (PHP function) of which to use to execute the applicaiton.
-     * @var string
+     * Execute the command using sudo?
+     * @var boolean
      */
-    private $run_method = 'exec';
+    private $sudo = false;
+
+    /**
+     * Redirect stderr to stdout?
+     * @var boolean
+     */
+    private $stderr = false;
 
     public function __construct()
     {
         $this->application_arguments = new Collection();
         $this->exectuion_response = new Collection();
+    }
+
+    /**
+     * Optional way to create new instance
+     * @param string $application The command to run.
+     * @return Executioner
+     */
+    public static function make($application)
+    {
+        return (new Executioner())->setApplication($application);
     }
 
     /**
@@ -85,37 +101,57 @@ class Executioner
     }
 
     /**
-     * Exceutes the command using PHP's exec() function.
+     * Ensure that the process is called with 'sudo' (*NIX systems only)
      * @return \Ballen\Executioner\Executioner
      */
-    public function asExec()
+    public function sudo($enabled = true)
     {
-        $this->run_method = 'exec';
+        $this->sudo = $enabled;
         return $this;
     }
 
     /**
-     * Exceutes the command using PHP's passthru() function.
+     * Enable stderr redirection to stdout.
+     * @param boolean $enabled
      * @return \Ballen\Executioner\Executioner
      */
-    public function asPassthru()
+    public function stderr($enabled = true)
     {
-        $this->run_method = 'passthru';
+        $this->stderror = $enabled;
         return $this;
+    }
+
+    /**
+     * Executes the process.
+     * @return array
+     * @throws Exceptions\ExecutionException
+     */
+    private function exceuteProcess()
+    {
+        $command = '';
+        if ($this->sudo) {
+            $command = 'sudo ';
+        }
+        $command .= escapeshellcmd($this->application_path) . $this->generateArguments();
+        if ($this->stderr) {
+            $command .= ' 2>&1';
+        }
+        exec($this->application_path . $this->generateArguments(), $result, $status);
+        if ($status > 0) {
+            throw new Exceptions\ExecutionException('Unknown error occured when attempting to execute: ' . $command . PHP_EOL);
+        }
+        return $result;
     }
 
     /**
      * Executes the appliaction with configured arguments.
-     * @return boolean
+     * @return Executioner
      * @throws Exceptions\ExecutionException
      */
     public function execute()
     {
-        if (!exec($this->application_path . $this->generateArguments(), $result)) {
-            throw new Exceptions\ExecutionException('Error occured when attempting to execute: ' . $this->application_path . $this->generateArguments());
-        }
-        $this->exectuion_response->reset()->push($result);
-        return true;
+        $this->exectuion_response->reset()->push($this->exceuteProcess());
+        return $this;
     }
 
     /**
@@ -173,7 +209,7 @@ class Executioner
      */
     public function resultAsText()
     {
-        $buffer = (string) '';
+        $buffer = '';
         foreach ($this->exectuion_response->all()->toArray() as $stdout) {
             $buffer .= $stdout . PHP_EOL;
         }
