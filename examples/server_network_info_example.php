@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Executioner Process Execution Library
  *
@@ -8,13 +7,11 @@
  *  CLI output results.
  *
  * @author ballen@bobbyallen.me (Bobby Allen)
- * @version 2.0.0
  * @license http://opensource.org/licenses/MIT
  * @link https://github.com/bobsta63/executioner
  *
  */
-require_once '../src/Ballen/Executioner/Executioner.php';
-
+require_once '../src/Executioner.php';
 use Ballen\Executioner\Executioner;
 
 $runner = new Executioner();
@@ -23,8 +20,6 @@ $runner = new Executioner();
 /**
  * An example showing how to view details of a server's network settings eg. ifconfig/ipconfig
  */
-
-
 if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
     // Windows uses 'ipconfig' to report on the network settings.
     $runner->setApplication('ipconfig');
@@ -38,4 +33,4 @@ $runner->execute();
 
 // We'll simply just display the results as plain text...
 echo '<h2>Server NIC settings:</h2>';
-echo '<pre>' .$runner->resultAsText(). '</pre>';
+echo '<pre>' . $runner->resultAsText() . '</pre>';

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Executioner Process Execution Library
  *
@@ -8,28 +7,22 @@
  *  CLI output results.
  *
  * @author ballen@bobbyallen.me (Bobby Allen)
- * @version 2.0.0
  * @license http://opensource.org/licenses/MIT
  * @link https://github.com/bobsta63/executioner
  *
  */
-require_once '../src/Ballen/Executioner/Executioner.php';
-
+require_once '../src/Executioner.php';
 use Ballen\Executioner\Executioner;
 
 $runner = new Executioner();
-
 
 /**
  * An example showing how to execute a command and then return the result as an array
  * and further split infomation down if required.
  */
-
-
-
 $runner->setApplication('php') // Call the PHP executable to display the version infomation.
-        ->addArgument('-v') // Displays the PHP version number!
-        ->execute();
+    ->addArgument('-v') // Displays the PHP version number!
+    ->execute();
 
 // We'll grab the result set as an Array as it's quicker and easier to then just grab the first line (1st element of the array)
 $results = $runner->resultAsArray();

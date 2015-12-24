@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Executioner Process Execution Library
  *
@@ -8,7 +7,6 @@
  *  CLI output results.
  *
  * @author ballen@bobbyallen.me (Bobby Allen)
- * @version 2.0.0
  * @license http://opensource.org/licenses/MIT
  * @link https://github.com/bobsta63/executioner
  *
@@ -175,5 +173,4 @@ class Executioner
         }
         return $buffer;
     }
-
 }

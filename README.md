@@ -8,20 +8,33 @@ Executioner is written and maintained by Bobby Allen and is licensed under the M
 Requirements
 ------------
 
-* PHP >= 5.3.x
+This library is developed and tested for PHP 5.4+
+
+License
+-------
+
+This client library is released under the MIT license, a [copy of the license](https://github.com/bobsta63/executioner/blob/master/LICENSE) is provided in this package.
 
 Installation
 ------------
 
-The recommended way to install Executioner is by using Composer, simply can add this directly to your application's **composer.json** file (under the ``require`` section) and then manually run ``composer update``.
+To install the package into your project (assuming you are using the Composer package manager) you can simply execute the following command from your terminal in the root of your project folder:
+
+```composer require ballen/executioner```
+
+Alternatively you can manually add this library to your project using the following steps, simply edit your project's composer.json file and add the following lines (or update your existing require section with the library like so):
 
 ```json
 "require": {
-    "ballen/executioner": "2.0.*@dev"
+        "ballen/executioner": "^3.0"
 }
 ```
 
-For those that are not using Composer you can extract the main library class file (``Executioner.php``) from ``src/Ballen/Executioner`` and *require* directly in your PHP projects.
+Then install the package like so:
+
+```composer update ballen/executioner --no-dev```
+
+For those that are not using Composer you can extract the main library class file (``Executioner.php``) from ``src/`` and *require* directly in your PHP projects.
 
 Examples
 --------
@@ -88,13 +101,7 @@ echo '<pre>' .$runner->resultAsText(). '</pre>';
 
 These examples can also be found in the [examples](examples) directory.
 
-License
+Support
 -------
-The MIT License (MIT)
-Copyright (c) 2013 - 2014 Bobby Allen <ballen@bobbyallen.me>
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+I am happy to provide support via. my personal email address, so if you need a hand drop me an email at: [ballen@bobbyallen.me]().
