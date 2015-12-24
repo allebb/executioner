@@ -11,11 +11,11 @@
  * @link https://github.com/bobsta63/executioner
  *
  */
-require_once '../src/Executioner.php';
+require_once '../vendor/autoload.php';
+
 use Ballen\Executioner\Executioner;
 
 $runner = new Executioner();
-
 
 /**
  * An example showing how to view details of a server's network settings eg. ifconfig/ipconfig

@@ -1,0 +1,67 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "6157295f99479baaa1c4ba138db07fe2",
+    "content-hash": "ab13ba52ff264062f7f4b4a10343f03b",
+    "packages": [
+        {
+            "name": "ballen/collection",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bobsta63/collection.git",
+                "reference": "0410ed3878902acf4fb5ab1e1dd416f074f9306f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bobsta63/collection/zipball/0410ed3878902acf4fb5ab1e1dd416f074f9306f",
+                "reference": "0410ed3878902acf4fb5ab1e1dd416f074f9306f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ballen\\Collection\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPLv2"
+            ],
+            "authors": [
+                {
+                    "name": "Bobby Allen",
+                    "email": "ballen@bobbyallen.me",
+                    "homepage": "http://bobbyallen.me",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Collection class (library) which provides OOP replacement for the traditional array data structure.",
+            "keywords": [
+                "array",
+                "collection",
+                "list"
+            ],
+            "time": "2015-12-21 12:51:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=5.4.0"
+    },
+    "platform-dev": []
+}

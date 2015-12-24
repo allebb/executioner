@@ -1,4 +1,7 @@
 <?php
+
+namespace Ballen\Executioner;
+
 /**
  * Executioner Process Execution Library
  *
@@ -11,55 +14,56 @@
  * @link https://github.com/bobsta63/executioner
  *
  */
-
-namespace Ballen\Executioner;
+use Ballen\Collection\Collection;
 
 class Executioner
 {
 
     /**
      * The full system path to the application/process you want to exectute.
-     * @var string Full system path to the application/process.
+     * @var string
      */
     private $application_path;
 
     /**
      * Stores application arguments to be parsed with the application.
-     * @var array Stores arguments to be sent with the command.
+     * @var Collection
      */
-    private $application_arguments = array();
+    private $application_arguments;
 
     /**
      * Stores the CLI response.
-     * @var array
+     * @var Collection
      */
-    private $exectuion_response = array();
+    private $exectuion_response;
 
     /**
-     * Stores a list of errors (if applicable after applciation exection.)
-     * @var array Stores a list of class error messages if applicable.
-     */
-    private $execution_errors = array();
-
-    /**
-     * Specifies the method of which to use to execute the applicaiton.
-     * @var string Method used to execute the application.
+     * Specifies the method (PHP function) of which to use to execute the applicaiton.
+     * @var string
      */
     private $run_method = 'exec';
 
+    public function __construct()
+    {
+        $this->application_arguments = new Collection();
+        $this->exectuion_response = new Collection();
+    }
+
     /**
      * Adds an argument to be added to the execution string.
-     * @param string $argument Argument to be added.
+     * @param string $argument
+     * @return \Ballen\Executioner\Executioner
      */
     public function addArgument($argument)
     {
-        $this->application_arguments[] = $argument;
+        $this->application_arguments->push($argument);
         return $this;
     }
 
     /**
      * Sets the application and path of which to be executed.
      * @param string $application The full system path to the application to execute.
+     * @return \Ballen\Executioner\Executioner
      */
     public function setApplication($application)
     {
@@ -73,21 +77,27 @@ class Executioner
      */
     protected function generateArguments()
     {
-        $argument_line = (string) '';
-        if (count($this->application_arguments) > 0) {
-            foreach ($this->application_arguments as $argn) {
-                $argument_line .= ' ' . $argn;
-            }
+        $arguments = '';
+        if (!$this->application_arguments->isEmpty()) {
+            $arguments = ' ' . $this->application_arguments->implode();
         }
-        return rtrim($argument_line);
+        return $arguments;
     }
 
+    /**
+     * Exceutes the command using PHP's exec() function.
+     * @return \Ballen\Executioner\Executioner
+     */
     public function asExec()
     {
         $this->run_method = 'exec';
         return $this;
     }
 
+    /**
+     * Exceutes the command using PHP's passthru() function.
+     * @return \Ballen\Executioner\Executioner
+     */
     public function asPassthru()
     {
         $this->run_method = 'passthru';
@@ -95,25 +105,21 @@ class Executioner
     }
 
     /**
-     * Executes the appliaction with all of the added arguments.
-     * @return type
+     * Executes the appliaction with configured arguments.
+     * @return boolean
+     * @throws Exceptions\ExecutionException
      */
     public function execute()
     {
-        $this->exectuion_response = null;
-        $this->execution_errors = null;
-
-        if (exec($this->application_path . $this->generateArguments(), $this->exectuion_response)) {
-            return true;
-        } else {
-            $this->execution_errors[] = 'Unidentified error occured when attempting to exectute: ' . $this->application_path . $this->generateArguments();
-            return false;
+        if (!exec($this->application_path . $this->generateArguments(), $result)) {
+            throw new Exceptions\ExecutionException('Error occured when attempting to execute: ' . $this->application_path . $this->generateArguments());
         }
+        $this->exectuion_response->reset()->push($result);
+        return true;
     }
 
     /**
      * Checks if the application/process is executable.
-     * @param type $file
      * @return boolean
      */
     protected function isExecutable()
@@ -127,7 +133,7 @@ class Executioner
 
     /**
      * Returns an array of class error messages.
-     * @return array Iteratable array of error messages.
+     * @return array Array of error messages.
      */
     public function getErrors()
     {
@@ -135,30 +141,30 @@ class Executioner
     }
 
     /**
-     * Returns the result (stdout) as an array.
+     * Returns the result (STDOUT) as an array.
      * @return array Result text (STDOUT).
      */
     public function resultAsArray()
     {
-        return $this->exectuion_response;
+        return $this->exectuion_response->all()->toArray();
     }
 
     /**
-     * Returns the result (stdout) as a JSON string.
+     * Returns the result (STDOUT) as a JSON string.
      * @return string Result text (STDOUT).
      */
     public function resultAsJSON()
     {
-        return json_encode($this->exectuion_response);
+        return $this->exectuion_response->all()->toJson();
     }
 
     /**
-     * Returns the result (stdout) as seralized data.
+     * Returns the result (STDOUT) as seralized data.
      * @return string Result text (STDOUT).
      */
     public function resultAsSerialized()
     {
-        return serialize($this->exectuion_response);
+        return serialize($this->exectuion_response->all()->toArray());
     }
 
     /**
@@ -168,8 +174,8 @@ class Executioner
     public function resultAsText()
     {
         $buffer = (string) '';
-        foreach ($this->exectuion_response as $stdout) {
-            $buffer .= $stdout . "\n";
+        foreach ($this->exectuion_response->all()->toArray() as $stdout) {
+            $buffer .= $stdout . PHP_EOL;
         }
         return $buffer;
     }
