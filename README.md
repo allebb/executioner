@@ -3,8 +3,6 @@ Executioner
 
 Executioner is a PHP library for executing system processes and applications with the ability to pass extra arguments and read CLI output results.
 
-Executioner is written and maintained by Bobby Allen and is licensed under the MIT license.
-
 Requirements
 ------------
 
@@ -55,7 +53,7 @@ $run->execute();
 echo $run->resultAsText();
 ```
 
-An example of getting the PHP version number using ``php -v CLI`` call.
+An example of getting the PHP version number using ``php -v`` terminal command.
 
 ```php
 use Ballen\Executioner\Executioner;
