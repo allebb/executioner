@@ -6,9 +6,9 @@
  * and applications with the ability to pass extra arguments and read
  *  CLI output results.
  *
- * @author ballen@bobbyallen.me (Bobby Allen)
+ * @author Bobby Allen <ballen@bobbyallen.me>
  * @license http://opensource.org/licenses/MIT
- * @link https://github.com/bobsta63/executioner
+ * @link https://github.com/allebb/executioner
  *
  */
 require_once '../vendor/autoload.php';
@@ -23,7 +23,7 @@ $run = new Executioner();
 try {
     $run->setApplication('service ssh reload') // Lets attempt to restart a non-existent system service.
         ->sudo() // Prefix our command with 'sudo' for non system users!
-        ->stderrToStdout() // Redirect stderr to the response too!
+        ->stderr() // Redirect stderr to the response too!
         ->execute(); // Execute the application with all arguments.
     echo $run->resultAsText(); // Output the response as a string.
 } catch (ExecutionException $ex) {

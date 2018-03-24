@@ -8,9 +8,9 @@ namespace Ballen\Executioner;
  * and applications with the ability to pass extra arguments and read
  *  CLI output results.
  *
- * @author  ballen@bobbyallen.me (Bobby Allen)
+ * @author  Bobby Allen <ballen@bobbyallen.me>
  * @license http://opensource.org/licenses/MIT
- * @link    https://github.com/bobsta63/executioner
+ * @link    https://github.com/allebb/executioner
  */
 use Ballen\Collection\Collection;
 
@@ -39,6 +39,13 @@ class Executioner
     private $executionResponse;
 
     /**
+     * Stores the CLI execution errors.
+     *
+     * @var Collection
+     */
+    private $executionErrors;
+
+    /**
      * Execute the command using sudo?
      *
      * @var boolean
@@ -52,10 +59,14 @@ class Executioner
      */
     private $stdError = false;
 
+    /**
+     * Executioner constructor.
+     */
     public function __construct()
     {
         $this->applicationArguments = new Collection();
         $this->executionResponse = new Collection();
+        $this->executionErrors = new Collection();
     }
 
     /**
@@ -73,7 +84,7 @@ class Executioner
      * Adds an argument to be added to the execution string.
      *
      * @param string $argument
-     * @return \Ballen\Executioner\Executioner
+     * @return Executioner
      */
     public function addArgument($argument)
     {
@@ -85,7 +96,7 @@ class Executioner
      * Sets the application and path of which to be executed.
      *
      * @param string $application The full system path to the application to execute.
-     * @return \Ballen\Executioner\Executioner
+     * @return Executioner
      */
     public function setApplication($application)
     {
@@ -140,7 +151,7 @@ class Executioner
      * Ensure that the process is called with 'sudo' (*NIX systems only)
      *
      * @param bool $enabled Enable (or disable) sudo.
-     * @return \Ballen\Executioner\Executioner
+     * @return Executioner
      */
     public function sudo($enabled = true)
     {
@@ -152,7 +163,7 @@ class Executioner
      * Enable stderr redirection to stdout.
      *
      * @param boolean $enabled Enable (or disable) redirection to std.
-     * @return \Ballen\Executioner\Executioner
+     * @return Executioner
      */
     public function stderr($enabled = true)
     {
@@ -171,13 +182,13 @@ class Executioner
         $command = $this->compileCommand();
         exec($command, $result, $status);
         if ($status > 0) {
-            throw new Exceptions\ExecutionException('Unknown error occured when attempting to execute: ' . $command . PHP_EOL);
+            throw new Exceptions\ExecutionException('Unknown error occurred when attempting to execute: ' . $command . PHP_EOL);
         }
         return $result;
     }
 
     /**
-     * Executes the appliaction with configured arguments.
+     * Executes the application with configured arguments.
      *
      * @return Executioner
      * @throws Exceptions\ExecutionException
@@ -209,7 +220,7 @@ class Executioner
      */
     public function getErrors()
     {
-        return $this->execution_errors;
+        return $this->executionErrors;
     }
 
     /**
