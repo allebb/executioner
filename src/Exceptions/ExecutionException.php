@@ -8,9 +8,10 @@ namespace Ballen\Executioner\Exceptions;
  * and applications with the ability to pass extra arguments and read
  *  CLI output results.
  *
- * @author  Bobby Allen <ballen@bobbyallen.me>
- * @license http://opensource.org/licenses/MIT
- * @link    https://github.com/allebb/executioner
+ * @author     Bobby Allen <ballen@bobbyallen.me>
+ * @package    Ballen\Executioner
+ * @license    http://opensource.org/licenses/MIT
+ * @link       https://github.com/allebb/executioner
  */
 class ExecutionException extends \Exception
 {

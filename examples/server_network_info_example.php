@@ -22,9 +22,8 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
     // Windows uses 'ipconfig' to report on the network settings.
     $run->setApplication('ipconfig');
 } else {
-    // Linux and UNIX generally uses 'ifconfig' instead (well run it with 'sudo' too just for the sake of it)...
-    $run->sudo()
-        ->setApplication('ifconfig');
+    // Linux and UNIX generally uses 'ifconfig' instead... (To re-enable ifconfig on Ubuntu 16.04, ensure you install 'net-tools')
+    $run->setApplication('ifconfig');
 }
 
 // We'll now execute the application and get the 'results'

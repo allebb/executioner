@@ -8,9 +8,10 @@ namespace Ballen\Executioner;
  * and applications with the ability to pass extra arguments and read
  *  CLI output results.
  *
- * @author  Bobby Allen <ballen@bobbyallen.me>
- * @license http://opensource.org/licenses/MIT
- * @link    https://github.com/allebb/executioner
+ * @author     Bobby Allen <ballen@bobbyallen.me>
+ * @package    Ballen\Executioner
+ * @license    http://opensource.org/licenses/MIT
+ * @link       https://github.com/allebb/executioner
  */
 use Ballen\Collection\Collection;
 
@@ -51,8 +52,6 @@ class Executioner
      * @var boolean
      */
     private $sudo = false;
-
-    private $sudoAs = null;
 
     /**
      * Redirect stderr to stdout?
@@ -179,7 +178,7 @@ class Executioner
      * @return array
      * @throws Exceptions\ExecutionException
      */
-    private function exceuteProcess()
+    private function executeProcess()
     {
         $command = $this->compileCommand();
         exec($command, $result, $status);
@@ -197,7 +196,7 @@ class Executioner
      */
     public function execute()
     {
-        $this->executionResponse->reset()->push($this->exceuteProcess());
+        $this->executionResponse->reset()->push($this->executeProcess());
         return $this;
     }
 
@@ -208,17 +207,13 @@ class Executioner
      */
     protected function isExecutable()
     {
-        if (is_executable($this->applicationPath)) {
-            return true;
-        } else {
-            return false;
-        }
+        return is_executable($this->applicationPath);
     }
 
     /**
      * Returns an array of class error messages.
      *
-     * @return array Array of error messages.
+     * @return Collection Collection of error messages.
      */
     public function getErrors()
     {
