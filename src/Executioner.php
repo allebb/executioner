@@ -4,15 +4,13 @@ namespace Ballen\Executioner;
 
 /**
  * Executioner Process Execution Library
- *
  * Executioner is a PHP library for executing system processes
  * and applications with the ability to pass extra arguments and read
  *  CLI output results.
  *
- * @author ballen@bobbyallen.me (Bobby Allen)
+ * @author  ballen@bobbyallen.me (Bobby Allen)
  * @license http://opensource.org/licenses/MIT
- * @link https://github.com/bobsta63/executioner
- *
+ * @link    https://github.com/bobsta63/executioner
  */
 use Ballen\Collection\Collection;
 
@@ -21,33 +19,38 @@ class Executioner
 
     /**
      * The full system path to the application/process you want to exectute.
+     *
      * @var string
      */
     private $application_path;
 
     /**
      * Stores application arguments to be parsed with the application.
+     *
      * @var Collection
      */
     private $application_arguments;
 
     /**
      * Stores the CLI response.
+     *
      * @var Collection
      */
     private $exectuion_response;
 
     /**
      * Execute the command using sudo?
+     *
      * @var boolean
      */
     private $sudo = false;
 
     /**
      * Redirect stderr to stdout?
+     *
      * @var boolean
      */
-    private $stderr = false;
+    private $stderror = false;
 
     public function __construct()
     {
@@ -57,6 +60,7 @@ class Executioner
 
     /**
      * Optional way to create new instance
+     *
      * @param string $application The command to run.
      * @return Executioner
      */
@@ -67,6 +71,7 @@ class Executioner
 
     /**
      * Adds an argument to be added to the execution string.
+     *
      * @param string $argument
      * @return \Ballen\Executioner\Executioner
      */
@@ -78,6 +83,7 @@ class Executioner
 
     /**
      * Sets the application and path of which to be executed.
+     *
      * @param string $application The full system path to the application to execute.
      * @return \Ballen\Executioner\Executioner
      */
@@ -88,7 +94,37 @@ class Executioner
     }
 
     /**
+     * Retrieves the compiled command.
+     *
+     * @return string
+     */
+    public function getCommand()
+    {
+        return $this->compileCommand();
+    }
+
+    /**
+     * Compiles the command that will be executed
+     *
+     * @return string
+     */
+    private function compileCommand()
+    {
+        $command = '';
+
+        if ($this->sudo) {
+            $command = 'sudo ';
+        }
+        $command .= escapeshellcmd($this->application_path) . $this->generateArguments();
+        if ($this->stderr) {
+            $command .= ' 2>&1';
+        }
+        return $command;
+    }
+
+    /**
      * Generates a list of arguments to be appended onto the executed path.
+     *
      * @return string The generated list of arguments.
      */
     protected function generateArguments()
@@ -102,6 +138,8 @@ class Executioner
 
     /**
      * Ensure that the process is called with 'sudo' (*NIX systems only)
+     *
+     * @param bool $enabled Enable (or disable) sudo.
      * @return \Ballen\Executioner\Executioner
      */
     public function sudo($enabled = true)
@@ -112,7 +150,8 @@ class Executioner
 
     /**
      * Enable stderr redirection to stdout.
-     * @param boolean $enabled
+     *
+     * @param boolean $enabled Enable (or disable) redirection to std.
      * @return \Ballen\Executioner\Executioner
      */
     public function stderr($enabled = true)
@@ -123,20 +162,14 @@ class Executioner
 
     /**
      * Executes the process.
+     *
      * @return array
      * @throws Exceptions\ExecutionException
      */
     private function exceuteProcess()
     {
-        $command = '';
-        if ($this->sudo) {
-            $command = 'sudo ';
-        }
-        $command .= escapeshellcmd($this->application_path) . $this->generateArguments();
-        if ($this->stderr) {
-            $command .= ' 2>&1';
-        }
-        exec($this->application_path . $this->generateArguments(), $result, $status);
+        $command = $this->compileCommand();
+        exec($command, $result, $status);
         if ($status > 0) {
             throw new Exceptions\ExecutionException('Unknown error occured when attempting to execute: ' . $command . PHP_EOL);
         }
@@ -145,6 +178,7 @@ class Executioner
 
     /**
      * Executes the appliaction with configured arguments.
+     *
      * @return Executioner
      * @throws Exceptions\ExecutionException
      */
@@ -156,6 +190,7 @@ class Executioner
 
     /**
      * Checks if the application/process is executable.
+     *
      * @return boolean
      */
     protected function isExecutable()
@@ -169,6 +204,7 @@ class Executioner
 
     /**
      * Returns an array of class error messages.
+     *
      * @return array Array of error messages.
      */
     public function getErrors()
@@ -178,6 +214,7 @@ class Executioner
 
     /**
      * Returns the result (STDOUT) as an array.
+     *
      * @return array Result text (STDOUT).
      */
     public function resultAsArray()
@@ -187,6 +224,7 @@ class Executioner
 
     /**
      * Returns the result (STDOUT) as a JSON string.
+     *
      * @return string Result text (STDOUT).
      */
     public function resultAsJSON()
@@ -196,6 +234,7 @@ class Executioner
 
     /**
      * Returns the result (STDOUT) as seralized data.
+     *
      * @return string Result text (STDOUT).
      */
     public function resultAsSerialized()
@@ -205,6 +244,7 @@ class Executioner
 
     /**
      * Returns the result (stdout) as a raw text string.
+     *
      * @return string Result text (STDOUT).
      */
     public function resultAsText()
