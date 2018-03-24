@@ -1,25 +1,32 @@
 {
-    "name": "ballen/executioner",
-    "version": "3.0.0",
-    "description": "Executioner is a PHP library for executing system processes and applications with the ability to pass extra arguments and read CLI output results.",
-    "type": "library",
-    "keywords": ["execute", "process", "run", "execution", "cli", "exec", "passthru"],
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Bobby Allen",
-            "email": "ballen@bobbyallen.me",
-            "homepage": "http://bobbyallen.me",
-            "role": "Developer"
-        }
-    ],
-    "require": {
-        "php": ">=5.4.0",
-        "ballen/collection": "^1.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "Ballen\\Executioner\\": "src/"
-        }
+  "name": "ballen/executioner",
+  "description": "Executioner is a PHP library for executing system processes and applications with the ability to pass extra arguments and read CLI output results.",
+  "type": "library",
+  "keywords": [
+    "execute",
+    "process",
+    "run",
+    "execution",
+    "cli",
+    "exec",
+    "passthru"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Bobby Allen",
+      "email": "ballen@bobbyallen.me",
+      "homepage": "http://bobbyallen.me",
+      "role": "Developer"
     }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "ballen/collection": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Ballen\\Executioner\\": "src/"
+    }
+  }
 }
