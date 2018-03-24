@@ -22,21 +22,21 @@ class Executioner
      *
      * @var string
      */
-    private $application_path;
+    private $applicationPath;
 
     /**
      * Stores application arguments to be parsed with the application.
      *
      * @var Collection
      */
-    private $application_arguments;
+    private $applicationArguments;
 
     /**
      * Stores the CLI response.
      *
      * @var Collection
      */
-    private $exectuion_response;
+    private $executionResponse;
 
     /**
      * Execute the command using sudo?
@@ -50,12 +50,12 @@ class Executioner
      *
      * @var boolean
      */
-    private $stderror = false;
+    private $stdError = false;
 
     public function __construct()
     {
-        $this->application_arguments = new Collection();
-        $this->exectuion_response = new Collection();
+        $this->applicationArguments = new Collection();
+        $this->executionResponse = new Collection();
     }
 
     /**
@@ -77,7 +77,7 @@ class Executioner
      */
     public function addArgument($argument)
     {
-        $this->application_arguments->push($argument);
+        $this->applicationArguments->push($argument);
         return $this;
     }
 
@@ -89,7 +89,7 @@ class Executioner
      */
     public function setApplication($application)
     {
-        $this->application_path = $application;
+        $this->applicationPath = $application;
         return $this;
     }
 
@@ -115,8 +115,8 @@ class Executioner
         if ($this->sudo) {
             $command = 'sudo ';
         }
-        $command .= escapeshellcmd($this->application_path) . $this->generateArguments();
-        if ($this->stderr) {
+        $command .= escapeshellcmd($this->applicationPath) . $this->generateArguments();
+        if ($this->stdError) {
             $command .= ' 2>&1';
         }
         return $command;
@@ -130,8 +130,8 @@ class Executioner
     protected function generateArguments()
     {
         $arguments = '';
-        if (!$this->application_arguments->isEmpty()) {
-            $arguments = ' ' . $this->application_arguments->implode();
+        if (!$this->applicationArguments->isEmpty()) {
+            $arguments = ' ' . $this->applicationArguments->implode();
         }
         return $arguments;
     }
@@ -156,7 +156,7 @@ class Executioner
      */
     public function stderr($enabled = true)
     {
-        $this->stderror = $enabled;
+        $this->stdError = $enabled;
         return $this;
     }
 
@@ -184,7 +184,7 @@ class Executioner
      */
     public function execute()
     {
-        $this->exectuion_response->reset()->push($this->exceuteProcess());
+        $this->executionResponse->reset()->push($this->exceuteProcess());
         return $this;
     }
 
@@ -195,7 +195,7 @@ class Executioner
      */
     protected function isExecutable()
     {
-        if (is_executable($this->application_path)) {
+        if (is_executable($this->applicationPath)) {
             return true;
         } else {
             return false;
@@ -219,7 +219,7 @@ class Executioner
      */
     public function resultAsArray()
     {
-        return $this->exectuion_response->all()->toArray();
+        return $this->executionResponse->all()->toArray();
     }
 
     /**
@@ -229,7 +229,7 @@ class Executioner
      */
     public function resultAsJSON()
     {
-        return $this->exectuion_response->all()->toJson();
+        return $this->executionResponse->all()->toJson();
     }
 
     /**
@@ -239,7 +239,7 @@ class Executioner
      */
     public function resultAsSerialized()
     {
-        return serialize($this->exectuion_response->all()->toArray());
+        return serialize($this->executionResponse->all()->toArray());
     }
 
     /**
@@ -250,7 +250,7 @@ class Executioner
     public function resultAsText()
     {
         $buffer = '';
-        foreach ($this->exectuion_response->all()->toArray() as $stdout) {
+        foreach ($this->executionResponse->all()->toArray() as $stdout) {
             $buffer .= $stdout . PHP_EOL;
         }
         return $buffer;
