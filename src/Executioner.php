@@ -52,6 +52,8 @@ class Executioner
      */
     private $sudo = false;
 
+    private $sudoAs = null;
+
     /**
      * Redirect stderr to stdout?
      *
