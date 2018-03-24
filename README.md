@@ -1,20 +1,16 @@
-Executioner
-===========
+# Executioner
 
 Executioner is a PHP library for executing system processes and applications with the ability to pass extra arguments and read CLI output results.
 
-Requirements
-------------
+## Requirements
 
 This library is developed and tested for PHP 5.4+
 
-License
--------
+## License
 
 This client library is released under the MIT license, a [copy of the license](https://github.com/bobsta63/executioner/blob/master/LICENSE) is provided in this package.
 
-Installation
-------------
+## Installation
 
 To install the package into your project (assuming you are using the Composer package manager) you can simply execute the following command from your terminal in the root of your project folder:
 
@@ -30,10 +26,10 @@ Alternatively you can manually add this library to your project using the follow
 
 Then install the package like so:
 
-```composer update ballen/executioner```
+```composer install ballen/executioner```
 
-Usage example
---------
+## Usage example
+
 Example of retrieving IP address information for the server.
 ```php
 
@@ -75,7 +71,6 @@ echo 'The extacted version number is: ' . $extracted_version_number . '';
 
 These examples can also be found in the [examples](examples) directory.
 
-Support
--------
+## Support
 
 I am happy to provide support via. my personal email address, so if you need a hand drop me an email at: [ballen@bobbyallen.me]().
