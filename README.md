@@ -4,7 +4,9 @@ Executioner is a PHP library for executing system processes and applications wit
 
 ## Requirements
 
-This library is developed and tested for PHP 5.4+
+This library is unit tested against PHP 7.3, 7.4 and 8.0!
+
+If you need to use an older version of PHP, you should instead install the 3.x version of this library (see below for details).
 
 ## License
 
@@ -16,17 +18,12 @@ To install the package into your project (assuming you are using the Composer pa
 
 ```composer require ballen/executioner```
 
-Alternatively you can manually add this library to your project using the following steps, simply edit your project's composer.json file and add the following lines (or update your existing require section with the library like so):
 
-```json
-"require": {
-        "ballen/executioner": "^3.0"
-}
+**If you need to use an older version of PHP, version 3.x.x supports PHP 5.3, 5.4, 5.5, 5.6, 7.0, 7.1 and 7.2, you can install this version using Composer with this command instead:**
+
+```shell
+composer require ballen/executioner ^3.0
 ```
-
-Then install the package like so:
-
-```composer install ballen/executioner```
 
 ## Usage example
 
