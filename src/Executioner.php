@@ -13,6 +13,7 @@ namespace Ballen\Executioner;
  * @license    http://opensource.org/licenses/MIT
  * @link       https://github.com/allebb/executioner
  */
+
 use Ballen\Collection\Collection;
 
 class Executioner
@@ -183,7 +184,9 @@ class Executioner
         $command = $this->compileCommand();
         exec($command, $result, $status);
         if ($status > 0) {
-            throw new Exceptions\ExecutionException('Unknown error occurred when attempting to execute: ' . $command . PHP_EOL);
+            throw new Exceptions\ExecutionException(
+                'Unknown error occurred when attempting to execute: ' . $command . PHP_EOL
+            );
         }
         return $result;
     }
@@ -205,7 +208,7 @@ class Executioner
      *
      * @return boolean
      */
-    protected function isExecutable()
+    public function isExecutable()
     {
         return is_executable($this->applicationPath);
     }

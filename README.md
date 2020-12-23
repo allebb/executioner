@@ -1,5 +1,13 @@
 # Executioner
 
+[![Build](https://github.com/allebb/executioner/workflows/build/badge.svg)](https://github.com/allebb/executioner/actions)
+[![Code Coverage](https://codecov.io/gh/allebb/executioner/branch/master/graph/badge.svg)](https://codecov.io/gh/allebb/executioner)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/allebb/executioner/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/allebb/executioner/?branch=master)
+[![Code Climate](https://codeclimate.com/github/allebb/executioner/badges/gpa.svg)](https://codeclimate.com/github/allebb/executioner)
+[![Latest Stable Version](https://poser.pugx.org/ballen/executioner/v/stable)](https://packagist.org/packages/ballen/executioner)
+[![Latest Unstable Version](https://poser.pugx.org/ballen/executioner/v/unstable)](https://packagist.org/packages/ballen/executioner)
+[![License](https://poser.pugx.org/ballen/executioner/license)](https://packagist.org/packages/ballen/executioner)
+
 Executioner is a PHP library for executing system processes and applications with the ability to pass extra arguments and read CLI output results.
 
 ## Requirements
@@ -67,6 +75,28 @@ echo 'The extacted version number is: ' . $extracted_version_number . '';
 ```
 
 These examples can also be found in the [examples](examples) directory.
+
+## Tests and coverage
+
+This library is fully unit tested using [PHPUnit](https://phpunit.de/).
+
+I use [GitHub Actions](https://github.com/) for continuous integration, which triggers tests for PHP 7.3, 7.4 and 8.0 each time a commit is pushed.
+
+If you wish to run the tests yourself you should run the following:
+
+```shell
+# Install the Cartographer Library (which will include PHPUnit as part of the require-dev dependencies)
+composer install
+
+# Now we run the unit tests (from the root of the project) like so:
+./vendor/bin/phpunit
+```
+
+Code coverage can also be run, and a report generated (this does require XDebug to be installed)...
+
+```shell
+./vendor/bin/phpunit --coverage-html ./report
+```
 
 ## Support
 
