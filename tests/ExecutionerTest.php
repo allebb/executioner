@@ -58,7 +58,8 @@ class ExecutionerTest extends TestCase
     {
         $php_version = Executioner::make('php')->addArgument('-v')->execute();
         $this->assertStringContainsString('PHP', $php_version->resultAsText());
-        $this->assertStringContainsString('Copyright (c) The PHP Group', $php_version->resultAsText());
+        $this->assertStringContainsString('Copyright (c)', $php_version->resultAsText());
+        $this->assertStringContainsString('The PHP Group', $php_version->resultAsText());
     }
 
     public function testCliOuputAsArray()
