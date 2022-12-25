@@ -12,7 +12,7 @@ Executioner is a PHP library for executing system processes and applications wit
 
 ## Requirements
 
-This library is unit tested against PHP 7.3, 7.4, 8.0 and 8.1!
+This library is unit tested against PHP 7.3, 7.4, 8.0, 8.1 and 8.2!
 
 If you need to use an older version of PHP, you should instead install the 3.x version of this library (see below for details).
 
@@ -80,7 +80,7 @@ These examples can also be found in the [examples](examples) directory.
 
 This library is fully unit tested using [PHPUnit](https://phpunit.de/).
 
-I use [GitHub Actions](https://github.com/) for continuous integration, which triggers tests for PHP 7.3, 7.4, 8.0 and 8.1 each time a commit is pushed.
+I use [GitHub Actions](https://github.com/) for continuous integration, which triggers tests for PHP 7.3, 7.4, 8.0, 8.1 and 8.2 each time a commit is pushed.
 
 If you wish to run the tests yourself you should run the following:
 
